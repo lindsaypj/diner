@@ -33,11 +33,17 @@ $f3->route('GET /lunch', function() {
     echo $view->render('views/lunch.html');
 });
 
-// Define Lunch route
-$f3->route('GET /lunch', function() {
+// Define Dinner route
+$f3->route('GET /dinner', function() {
     echo "Dinner Page";
 //    $view = new Template();
-//    echo $view->render('views/diner.html');
+//    echo $view->render('views/dinner.html');
+});
+
+// Define Order route
+$f3->route('GET /order', function() {
+    $view = new Template();
+    echo $view->render('views/order_form.html');
 });
 
 
