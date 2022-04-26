@@ -7,3 +7,7 @@
 .btn-primary:hover {
     background-color: #721c24 !important;
 }
+
+.w-30 {
+    width: 30%;
+}
