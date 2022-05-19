@@ -40,12 +40,12 @@ $f3->route('GET /dinner', function() {
 });
 
 // Define Order route
-$f3->route('GET|POST /order', function($f3) {
+$f3->route('GET|POST /order', function() {
     $GLOBALS['con']->order();
 });
 
 // Define Order2 route
-$f3->route('GET|POST /order2', function($f3) {
+$f3->route('GET|POST /order2', function() {
     $GLOBALS['con']->order2();
 });
 
