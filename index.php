@@ -4,76 +4,54 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Require the autoload file
+require_once('vendor/autoload.php');
+
 // Start Session
 session_start();
 
-// Require the autoload file
-require_once('vendor/autoload.php');
-require_once('model/data-layer.php');
-
 // Create an instance of the base class
 $f3 = Base::instance();
+
+// Create instance of Controller
+$con = new Controller($f3);
 
 
 ////   ROUTES   ////
 
 // Define default route
 $f3->route('GET /', function() {
-//    echo "Diner Project";
-
-    $view = new Template();
-    echo $view->render('views/home.html');
+    $GLOBALS['con']->home();
 });
 
 // Define Breakfast route
 $f3->route('GET /breakfast', function() {
-    $view = new Template();
-    echo $view->render('views/breakfast.html');
+    $GLOBALS['con']->breakfast();
 });
 
 // Define Lunch route
 $f3->route('GET /lunch', function() {
-    $view = new Template();
-    echo $view->render('views/lunch.html');
+    $GLOBALS['con']->lunch();
 });
 
 // Define Dinner route
 $f3->route('GET /dinner', function() {
-    echo "Dinner Page";
-//    $view = new Template();
-//    echo $view->render('views/dinner.html');
+    $GLOBALS['con']->dinner();
 });
 
 // Define Order route
-$f3->route('GET /order', function($f3) {
-    // Add meals to Fat-Free hive
-    $f3->set('meals', getMeals());
-
-    $view = new Template();
-    echo $view->render('views/order_form1.html');
+$f3->route('GET|POST /order', function($f3) {
+    $GLOBALS['con']->order();
 });
 
 // Define Order2 route
-$f3->route('POST /order2', function($f3) {
-
-    // Add meals to Fat-Free hive
-    $f3->set('condiments', getCondiments());
-
-    // Move Order Form 1 data to session
-    $_SESSION['food'] = $_POST['food'];
-    $_SESSION['meal'] = $_POST['meal'];
-
-    $view = new Template();
-    echo $view->render('views/order_form2.html');
+$f3->route('GET|POST /order2', function($f3) {
+    $GLOBALS['con']->order2();
 });
 
 // Define Summary route
-$f3->route('POST /summary', function() {
-    $conds = empty($_POST['conds']) ? "" : implode(", ", $_POST['conds']);
-    $_SESSION['conds'] = $conds;
-
-    $view = new Template();
-    echo $view->render('views/order_summary.html');
+$f3->route('GET|POST /summary', function() {
+    $GLOBALS['con']->summary();
 });
 
 
