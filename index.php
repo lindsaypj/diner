@@ -10,6 +10,9 @@ require_once('vendor/autoload.php');
 // Start Session
 session_start();
 
+// Test DataLayer
+$datalayer = new DataLayer();
+
 // Create an instance of the base class
 $f3 = Base::instance();
 
@@ -52,6 +55,11 @@ $f3->route('GET|POST /order2', function() {
 // Define Summary route
 $f3->route('GET|POST /summary', function() {
     $GLOBALS['con']->summary();
+});
+
+// Define Admin route
+$f3->route('GET|POST /admin', function() {
+    $GLOBALS['con']->admin();
 });
 
 
